@@ -9,7 +9,7 @@ const social = () => {
         <a href='https://dribbble.com/' className='home_social-icon' target='_blank'>
         <i class="uil uil-dribbble"></i>
         </a>
-        <a href='https://github.com/' className='home_social-icon' target='_blank'>
+        <a href='https://github.com/sachinkhutale' className='home_social-icon' target='_blank'>
         <i class="uil uil-github"></i>
         </a>
     </div>
