@@ -1739,7 +1739,7 @@ export const rightService3 = [
 ]
 
 
-export const leftService = [
+export const leftService4 = [
     // {
     //   "tripType": "ALL",
     //   "towType": "ALL",
@@ -1844,14 +1844,14 @@ export const leftService = [
     //   },
 ]
 
-export const  rightService = [
-    // {
-    //     "tripType": "ALL",
-    //     "towType": "ALL",
-    //     "minTowZone": "1",
-    //     "maxTowZone": "99",
-    //     "fee": "10"
-    // },
+export const  rightService4 = [
+    {
+        "tripType": "ALL",
+        "towType": "ALL",
+        "minTowZone": "1",
+        "maxTowZone": "99",
+        "fee": "10"
+    },
     /////////////////ex 2 for ALL /////////////////////////////////
     // {
     //     "tripType": "ALL",
@@ -1877,27 +1877,27 @@ export const  rightService = [
       
 
 
-      {
-        "tripType": "PICKUP",
-        "towType": "ALL",
-        "minTowZone": "1",
-        "maxTowZone": "10",
-        "fee": "10"
-      },
-      {
-        "tripType": "PICKUP",
-        "towType": "ALL",
-        "minTowZone": "11",
-        "maxTowZone": "20",
-        "fee": "20"
-      },
-      {
-        "tripType": "PICKUP",
-        "towType": "ALL",
-        "minTowZone": "21",
-        "maxTowZone": "99",
-        "fee": "30"
-      },
+      // {
+      //   "tripType": "PICKUP",
+      //   "towType": "ALL",
+      //   "minTowZone": "1",
+      //   "maxTowZone": "10",
+      //   "fee": "10"
+      // },
+      // {
+      //   "tripType": "PICKUP",
+      //   "towType": "ALL",
+      //   "minTowZone": "11",
+      //   "maxTowZone": "20",
+      //   "fee": "20"
+      // },
+      // {
+      //   "tripType": "PICKUP",
+      //   "towType": "ALL",
+      //   "minTowZone": "21",
+      //   "maxTowZone": "99",
+      //   "fee": "30"
+      // },
 
     //   {
     //     "tripType": "PICKUP",
@@ -2503,5 +2503,149 @@ export const rightService6 = [
         "maxTowZone": "99",
         "fee": "15"
       },
+
+]
+
+export const leftService = [
+  {
+      "tripType": "PICKUP",
+      "towType": "Heavy",
+      "minTowZone": "1",
+      "maxTowZone": "99",
+      "fee": "5"
+    },
+    {
+      "tripType": "PICKUP",
+      "towType": "Standard,Medium",
+      "minTowZone": "1",
+      "maxTowZone": "30",
+      "fee": "30"
+    },
+    {
+      "tripType": "PICKUP",
+      "towType": "Standard,Medium",
+      "minTowZone": "31",
+      "maxTowZone": "60",
+      "fee": "35"
+    },
+    {
+      "tripType": "PICKUP",
+      "towType": "Standard,Medium",
+      "minTowZone": "61",
+      "maxTowZone": "90",
+      
+      "fee": "35"
+    },
+    {
+      "tripType": "PICKUP",
+      "towType": "Standard,Medium",
+      "minTowZone": "91",
+      "maxTowZone": "99",
+      "fee": "35"
+    },
+    {
+      "tripType": "ALL",
+      "towType": "ALL",
+      "minTowZone": "1",
+      "maxTowZone": "10",
+      "fee": "35"
+    },
+    {
+      "tripType": "ALL",
+      "towType": "ALL",
+      "minTowZone": "11",
+      "maxTowZone": "50",
+      "fee": "35"
+    },
+    {
+      "tripType": "ALL",
+      "towType": "ALL",
+      "minTowZone": "51",
+      "maxTowZone": "99",
+      "fee": "35"
+    },
+]
+
+export const rightService = [
+  ///////////////////////////// Ex.1
+  {
+      "tripType": "DELIVERY",
+      "towType": "Heavy",
+      "minTowZone": "1",
+      "maxTowZone": "99",
+      "fee": "5"
+    },
+    {
+      "tripType": "DELIVERY",
+      "towType": "Standard",
+      "minTowZone": "1",
+      "maxTowZone": "99",
+      "fee": "10"
+    },
+
+    {
+      "tripType": "DELIVERY",
+      "towType": "Long Haul",
+      "minTowZone": "1",
+      "maxTowZone": "99",
+      "fee": "15"
+    },
+    {
+      "tripType": "DELIVERY",
+      "towType": "Medium",
+      "minTowZone": "1",
+      "maxTowZone": "99",
+      "fee": "25"
+    },
+    {
+      "tripType": "abc",
+      "towType": "Heavy",
+      "minTowZone": "1",
+      "maxTowZone": "99",
+      "fee": "5"
+    },
+   {
+      "tripType": "abc",
+      "towType": "Standard",
+      "minTowZone": "1",
+      "maxTowZone": "99",
+      "fee": "10"
+    },
+
+      {
+      "tripType": "abc",
+      "towType": "Long Haul",
+      "minTowZone": "1",
+      "maxTowZone": "99",
+      "fee": "15"
+    },
+    {
+      "tripType": "abc",
+      "towType": "Medium",
+      "minTowZone": "1",
+      "maxTowZone": "99",
+      "fee": "25"
+    },
+    {
+      "tripType": "ALL",
+      "towType": "Standard",
+      "minTowZone": "1",
+      "maxTowZone": "10",
+      "fee": "5"
+    },
+    {
+      "tripType": "ALL",
+      "towType": "Standard",
+      "minTowZone": "11",
+      "maxTowZone": "99",
+      "fee": "10"
+    },
+    {
+      "tripType": "ALL",
+      "towType": "Medium",
+      "minTowZone": "1",
+      "maxTowZone": "99",
+      "fee": "15"
+    },
 
 ]

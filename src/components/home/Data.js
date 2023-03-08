@@ -633,14 +633,16 @@ const Data = () => {
         return finalArray
     }
 
-    const getTripTowTypeCombinationNew =(currentRow, tripType, towType) => {
+    const getTripTowTypeCombinationNew =(middleRows, tripType, towType) => {
         let splittedRows = []
-        splittedRows = {
-            ...currentRow,
-            tripType: tripType,
-            towType: towType,
-        }
-        return [splittedRows]
+        splittedRows = middleRows.map((item) => {
+            return {
+                ...item,
+                tripType: tripType,
+                towType: towType,
+            }
+        })
+        return splittedRows
     }
 
     const checkIsAllTypeNew = (service) => {
@@ -685,7 +687,7 @@ const Data = () => {
                             continue
                         }
                         if (!isRightTripALL && !isRightTowALL) {
-                            const splittedArray = getTripTowTypeCombinationNew(currentRow, currentRightRow.tripType, currentRightRow.towType)
+                            const splittedArray = getTripTowTypeCombinationNew(middleRows, currentRightRow.tripType, currentRightRow.towType)
                             const isRowPresent = checkIsRowPresentNew(finalArray, splittedArray)
                             if (!isRowPresent)
                                 finalArray = [...finalArray, ...splittedArray]
@@ -701,11 +703,11 @@ const Data = () => {
                         }
                     }
                 }
-                if (leftService.length === 1) { //It means if right side has only ALL ALL
+                //if (leftService.length === 1) { //It means if right side has only ALL ALL
                     const isRowPresent = checkIsRowPresentNew(finalArray, middleRows)
                     if (!isRowPresent)
                         finalArray = [...finalArray, ...middleRows]
-                }
+                //}
                 mainIndex = mainIndex + middleRows.length
             }
 
@@ -817,7 +819,44 @@ const Data = () => {
         return finalArray
     }
 
+    const splitMultipleTypes = (updatedServiceText) => {
+        let finalArray = []
+
+        if (updatedServiceText.length > 0) {
+          let mainIndex = 0
+          while (mainIndex < updatedServiceText.length) {
+            const currentRow = updatedServiceText[mainIndex]
+            const similarRows = updatedServiceText.filter((row) => currentRow.tripType === row.tripType && currentRow.towType === row.towType)
+            const towType = currentRow.towType
+            const isMultipleTowTypes = towType.indexOf(',')
+            if (isMultipleTowTypes !== -1) {
+              const towTypes = towType.split(',')
+    
+              let finalSplittedRows = []
+              towTypes.forEach(towType => {
+                let splittedRows = similarRows.map((row) => {
+                  return {
+                    ...row,
+                    towType: towType,
+                }
+                })
+                finalSplittedRows = [...finalSplittedRows, ...splittedRows]
+              })
+              finalArray = [...finalArray, ...finalSplittedRows]
+              mainIndex = mainIndex + similarRows.length
+            } else {
+              finalArray = [...finalArray, ...similarRows]
+              mainIndex = mainIndex + similarRows.length
+            }
+          }
+        }
+        return finalArray
+      }
+
     const compareLogic = (leftService, rightService) => {
+        leftService = splitMultipleTypes(leftService)
+        rightService = splitMultipleTypes(rightService)
+
         const hasLeftServiceALLType = checkIsAllTypeNew(leftService)
         const hasRightServiceALLType = checkIsAllTypeNew(rightService)
         
