@@ -827,9 +827,48 @@ const Data = () => {
           while (mainIndex < updatedServiceText.length) {
             const currentRow = updatedServiceText[mainIndex]
             const similarRows = updatedServiceText.filter((row) => currentRow.tripType === row.tripType && currentRow.towType === row.towType)
+
+            const tripType = currentRow.tripType
+            const isMultipleTripTypes = tripType.indexOf(',')
+
             const towType = currentRow.towType
             const isMultipleTowTypes = towType.indexOf(',')
-            if (isMultipleTowTypes !== -1) {
+
+            if ((isMultipleTripTypes !==-1) && (isMultipleTowTypes !== -1)) {
+                let finalSplittedRows = []
+                const tripTypes = tripType.split(',')
+                const towTypes = towType.split(',')
+                tripTypes.forEach((tripType) => {
+                    let splittedRows = []
+                    towTypes.forEach((towType) => {
+                        splittedRows = similarRows.map((row) => {
+                            let splittedRow = {
+                                ...row,
+                                tripType: tripType,
+                                towType: towType,
+                            }
+                            return splittedRow
+                        })
+                        finalSplittedRows = [...finalSplittedRows, ...splittedRows]
+                    })
+                })
+                finalArray = [...finalArray, ...finalSplittedRows]
+                mainIndex = mainIndex + similarRows.length
+            } else if (isMultipleTripTypes !== -1) {
+                const tripTypes = tripType.split(',')
+                let finalSplittedRows = []
+                tripTypes.forEach(tripType => {
+                  let splittedRows = similarRows.map((row) => {
+                    return {
+                      ...row,
+                      tripType: tripType,
+                  }
+                  })
+                  finalSplittedRows = [...finalSplittedRows, ...splittedRows]
+                })
+                finalArray = [...finalArray, ...finalSplittedRows]
+                mainIndex = mainIndex + similarRows.length
+            } else if (isMultipleTowTypes !== -1) {
               const towTypes = towType.split(',')
     
               let finalSplittedRows = []
