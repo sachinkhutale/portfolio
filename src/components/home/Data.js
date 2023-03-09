@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {
     leftService,
     rightService,
+    comparedData,
 } from './mockData'
 
 
@@ -40,14 +41,22 @@ const Data = () => {
     }
 
     const sortStringPropInArray = (data) => {
-        return data.sort(
-          function (b, a) {
-            if (a.tripType === b.tripType) {
-              return b.towType.localeCompare(a.towType);
+        const sortedArray = data.sort((a, b) => {
+            if (a.tripType === "ALL" && b.tripType !== "ALL") {
+                return 1;
+            } else if (a.tripType !== "ALL" && b.tripType === "ALL") {
+                return -1;
+            } else {
+                return a.tripType.localeCompare(b.tripType) || a.towType.localeCompare(b.towType);
             }
-            return a.tripType > b.tripType ? -1 : 1;
-          }
-        );
+        })
+
+        const withoutALLType = sortedArray.filter((row) => row.tripType !== 'ALL' && row.towType !== 'ALL')
+        const withOneALLType = sortedArray.filter((row) =>  (row.tripType !== 'ALL' && row.towType === 'ALL') || (row.tripType === 'ALL' && row.towType !== 'ALL'))
+        const allALLType = sortedArray.filter((row) => row.tripType === 'ALL' && row.towType === 'ALL')
+
+        const finalArray = [...withoutALLType, ...withOneALLType, ...allALLType];
+        return finalArray
     }
 
     const getComparedPricingRows = (parsedLeftService, parsedRightService) => {
@@ -243,7 +252,6 @@ const Data = () => {
             }
 
         }
-        console.log(comparedRows)
         return comparedRows
     }
 
@@ -633,16 +641,19 @@ const Data = () => {
         return finalArray
     }
 
-    const getTripTowTypeCombinationNew =(middleRows, tripType, towType) => {
+    const getTripTowTypeCombinationNew = (finalArray, middleRows, tripType, towType) => {
         let splittedRows = []
         splittedRows = middleRows.map((item) => {
-            return {
-                ...item,
-                tripType: tripType,
-                towType: towType,
-            }
+          return {
+            ...item,
+            tripType: tripType,
+            towType: towType,
+          }
         })
-        return splittedRows
+        const isRowPresent = checkIsRowPresentNew(finalArray, splittedRows)
+        if (!isRowPresent)
+            finalArray = [...finalArray, ...splittedRows]
+        return finalArray
     }
 
     const checkIsAllTypeNew = (service) => {
@@ -687,10 +698,7 @@ const Data = () => {
                             continue
                         }
                         if (!isRightTripALL && !isRightTowALL) {
-                            const splittedArray = getTripTowTypeCombinationNew(middleRows, currentRightRow.tripType, currentRightRow.towType)
-                            const isRowPresent = checkIsRowPresentNew(finalArray, splittedArray)
-                            if (!isRowPresent)
-                                finalArray = [...finalArray, ...splittedArray]
+                            finalArray = getTripTowTypeCombinationNew(finalArray, middleRows, currentRightRow.tripType, currentRightRow.towType)
                             rightIndex = rightIndex + middleRightRows.length
                             continue
                         }
@@ -849,42 +857,32 @@ const Data = () => {
                             }
                             return splittedRow
                         })
-                        finalSplittedRows = [...finalSplittedRows, ...splittedRows]
+                        const isPresent =  checkIsRowPresentNew(finalArray, splittedRows)
+                        if (!isPresent)
+                            finalSplittedRows = [...finalSplittedRows, ...splittedRows]
                     })
                 })
                 finalArray = [...finalArray, ...finalSplittedRows]
                 mainIndex = mainIndex + similarRows.length
+
             } else if (isMultipleTripTypes !== -1) {
                 const tripTypes = tripType.split(',')
-                let finalSplittedRows = []
                 tripTypes.forEach(tripType => {
-                  let splittedRows = similarRows.map((row) => {
-                    return {
-                      ...row,
-                      tripType: tripType,
-                  }
-                  })
-                  finalSplittedRows = [...finalSplittedRows, ...splittedRows]
+                    finalArray = getTripTypeCombinationNew(finalArray, similarRows, tripType)
                 })
-                finalArray = [...finalArray, ...finalSplittedRows]
                 mainIndex = mainIndex + similarRows.length
+
             } else if (isMultipleTowTypes !== -1) {
               const towTypes = towType.split(',')
-    
-              let finalSplittedRows = []
-              towTypes.forEach(towType => {
-                let splittedRows = similarRows.map((row) => {
-                  return {
-                    ...row,
-                    towType: towType,
-                }
-                })
-                finalSplittedRows = [...finalSplittedRows, ...splittedRows]
+                  towTypes.forEach(towType => {
+                finalArray = getTowTypeCombinationNew(finalArray, similarRows, towType)
               })
-              finalArray = [...finalArray, ...finalSplittedRows]
               mainIndex = mainIndex + similarRows.length
+
             } else {
-              finalArray = [...finalArray, ...similarRows]
+              const isPresent =  checkIsRowPresentNew(finalArray, similarRows)
+              if (!isPresent)
+                finalArray = [...finalArray, ...similarRows]
               mainIndex = mainIndex + similarRows.length
             }
           }
@@ -907,10 +905,10 @@ const Data = () => {
             getSplittedAllCombinations(rightService, leftService) : rightService
 
         //Compare lift service with right service
-        let comparedRows = campareByTowZone(splittedLeftService, splittedRightService)
-
-
-
+        let comparedRows = comparedData
+        //campareByTowZone(splittedLeftService, splittedRightService)
+        comparedRows = sortStringPropInArray(comparedRows)
+        console.log(comparedRows)
 
         //let comparedRows = getComparedPricingRows(splittedLeftService, splittedRightService)
 

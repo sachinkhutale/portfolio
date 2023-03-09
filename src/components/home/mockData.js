@@ -1,5 +1,215 @@
 import React, { useState } from 'react'
 
+export const comparedData = [
+
+  {
+    "tripType": "PICKUP",
+    "towType": "Medium",
+    "minTowZone": "1",
+    "maxTowZone": "99",
+    "diff": -20
+},
+  {
+    "tripType": "PICKUP",
+    "towType": "Heavy",
+    "minTowZone": "1",
+    "oldPrice": "$5",
+    "newPrice": "-",
+    "maxTowZone": "99",
+    "diff": "-"
+},
+  {
+      "tripType": "abc",
+      "towType": "Heavy",
+      "minTowZone": "1",
+      "maxTowZone": "99",
+      "diff": -30
+  },
+  {
+    "tripType": "PICKPUP",
+    "towType": "ALL",
+    "minTowZone": "1",
+    "maxTowZone": "10",
+    "diff": -20
+  },
+  {
+    "tripType": "ALL",
+    "towType": "ALL",
+    "minTowZone": "1",
+    "oldPrice": "$35",
+    "newPrice": "-",
+    "maxTowZone": "10",
+    "diff": "-"
+},
+{
+    "tripType": "ALL",
+    "towType": "ALL",
+    "minTowZone": "11",
+    "oldPrice": "$35",
+    "newPrice": "-",
+    "maxTowZone": "99",
+    "diff": "-"
+},
+  {
+      "tripType": "abc",
+      "towType": "Long Haul",
+      "minTowZone": "1",
+      "maxTowZone": "10",
+      "diff": -20
+  },
+  {
+      "tripType": "abc",
+      "towType": "Long Haul",
+      "minTowZone": "11",
+      "maxTowZone": "50",
+      "diff": -20
+  },
+  {
+      "tripType": "abc",
+      "towType": "Long Haul",
+      "minTowZone": "51",
+      "maxTowZone": "99",
+      "diff": -20
+  },
+  {
+      "tripType": "abc",
+      "towType": "Medium",
+      "minTowZone": "1",
+      "maxTowZone": "10",
+      "diff": -10
+  },
+  {
+      "tripType": "abc",
+      "towType": "Medium",
+      "minTowZone": "11",
+      "maxTowZone": "99",
+      "diff": -10
+  },
+  {
+      "tripType": "abc",
+      "towType": "Standard",
+      "minTowZone": "1",
+      "maxTowZone": "99",
+      "diff": -25
+  },
+
+  {
+      "tripType": "DELIVERY",
+      "towType": "Heavy",
+      "minTowZone": "1",
+      "maxTowZone": "99",
+      "diff": -30
+  },
+  {
+      "tripType": "DELIVERY",
+      "towType": "Long Haul",
+      "minTowZone": "1",
+      "maxTowZone": "10",
+      "diff": -20
+  },
+  {
+      "tripType": "DELIVERY",
+      "towType": "Long Haul",
+      "minTowZone": "11",
+      "maxTowZone": "50",
+      "diff": -20
+  },
+  {
+      "tripType": "DELIVERY",
+      "towType": "Long Haul",
+      "minTowZone": "51",
+      "maxTowZone": "99",
+      "diff": -20
+  },
+  {
+      "tripType": "DELIVERY",
+      "towType": "Medium",
+      "minTowZone": "1",
+      "maxTowZone": "99",
+      "diff": -10
+  },
+  {
+      "tripType": "DELIVERY",
+      "towType": "Standard",
+      "minTowZone": "1",
+      "maxTowZone": "10",
+      "diff": -25
+  },
+  {
+      "tripType": "DELIVERY",
+      "towType": "Standard",
+      "minTowZone": "11",
+      "maxTowZone": "50",
+      "diff": -25
+  },
+  {
+      "tripType": "DELIVERY",
+      "towType": "Standard",
+      "minTowZone": "51",
+      "maxTowZone": "99",
+      "diff": -25
+  },
+
+  {
+      "tripType": "PICKUP",
+      "towType": "Standard",
+      "minTowZone": "1",
+      "maxTowZone": "10",
+      "diff": -25
+  },
+  {
+      "tripType": "PICKUP",
+      "towType": "Standard",
+      "minTowZone": 11,
+      "maxTowZone": "30",
+      "diff": -20
+  },
+  {
+      "tripType": "PICKUP",
+      "towType": "Standard",
+      "minTowZone": "31",
+      "maxTowZone": "99",
+      "diff": -25
+  },
+  {
+      "tripType": "ALL",
+      "towType": "Standard",
+      "minTowZone": "1",
+      "maxTowZone": "10",
+      "diff": -30
+  },
+  {
+      "tripType": "ALL",
+      "towType": "Standard",
+      "minTowZone": "11",
+      "maxTowZone": "50",
+      "diff": -25
+  },
+  {
+      "tripType": "ALL",
+      "towType": "Standard",
+      "minTowZone": "51",
+      "maxTowZone": "99",
+      "diff": -25
+  },
+
+  {
+    "tripType": "ALL",
+    "towType": "Medium",
+    "minTowZone": "1",
+    "maxTowZone": "99",
+    "diff": -20
+  },
+  {
+    "tripType": "DELIVERY",
+    "towType": "ALL",
+    "minTowZone": "11",
+    "maxTowZone": "99",
+    "diff": -25
+},
+]
+
+
 export const left = [
     {
         "tripType": "DELIVERY",
@@ -2513,6 +2723,13 @@ export const leftService = [
       "minTowZone": "1",
       "maxTowZone": "99",
       "fee": "5"
+    },
+    {
+      "tripType": "PICKUP",
+      "towType": "Medium",
+      "minTowZone": "1",
+      "maxTowZone": "99",
+      "fee": "35"
     },
     {
       "tripType": "PICKUP",
